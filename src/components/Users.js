@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "../api/axios";
-import useRefreshToken from "../hooks/useRefreshToken";
 
 const Users = () => {
 
     const [users, setUsers] = useState();
-    const refresh = useRefreshToken();
 
     useEffect(() => {
         let isMounted = true;
@@ -41,8 +39,6 @@ const Users = () => {
                 )
                 : <p>No users wer found.</p>
             }
-            <button onClick={() => refresh()}>Refresh</button>
-            <br/>
         </article>);
 };
 
