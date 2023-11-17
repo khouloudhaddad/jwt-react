@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "../api/axios";
+import useRefreshToken from "../hooks/useRefreshToken";
+
 const Users = () => {
+
     const [users, setUsers] = useState();
+    const refresh = useRefreshToken();
+
     useEffect(() => {
         let isMounted = true;
         const controller = new AbortController();
@@ -30,12 +35,15 @@ const Users = () => {
             <h2>Users List</h2>
             {users?.length ?
                 (
-                    <ul>
-                        {users.map((user, i) => <li key={i}>{user?.username}</li>)}
+                <ul>
+                    {users.map((user, i) => <li key={i}>{user?.username}</li>)}
                 </ul>
                 )
-            : <p>No users wer found.</p>>}
-  </article>);
+                : <p>No users wer found.</p>
+            }
+            <button onClick={() => refresh()}>Refresh</button>
+            <br/>
+        </article>);
 };
 
 export default Users;
